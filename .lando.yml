@@ -1,0 +1,28 @@
+name: ecommerce
+services:
+  custom-service:
+    type: php:7.3
+    via: apache:2.4
+    ssl: false
+    webroot: .
+    xdebug: true
+    composer:
+      type: php:7.0
+      composer:
+        phpunit/phpunit: "*"
+    tooling:
+      php:
+        service: defaults
+    config:
+      php: config/php.ini
+  custom-service2:
+    type: phpmyadmin
+    hosts:
+      - database
+  database:
+    type: mariadb
+    portforward: true
+    creds:
+      user: 5ra
+      password: secret
+      database: store
